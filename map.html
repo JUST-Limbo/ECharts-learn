@@ -10,40 +10,88 @@
 <body>
   <div id="main" style="width: 600px; height: 400px;border:1px solid red;margin:100px auto;"></div>
   <script src="./js/echarts.min.js"></script>
+  <script src="./js/map/china.js"></script>
   <script type="text/javascript">
     let container = document.getElementById("main");
     var myChart = echarts.init(container);
 
-    // 指定图表的配置项和数据
-    var option = {
-      title: {
-        text: "疫情地图",
-        link: "http://www.baidu.com",
-        textStyle: {
-          color: 'green',
-        },
-        subtext: "123",
-        left: 'center',
-        padding: 15
-      },
-      xAxis: {
-      },
-      yAxis: {
-      },
-      // 悬浮提示
-      tooltip: {
-      },
-      series: [
-        {
-          name:'疫情地图',
-          type:'map',
-          map: 'china'
+    fetch('./data.json').then(res => res.json()).then(res => {
+      // "provinceName":"河北省","provinceShortName":"河北","currentConfirmedCount":225,"confirmedCount":598,"suspectedCount":0,"curedCount":367,"deadCount":6
+      let data = res.map(r => {
+        return {
+          name: r.provinceShortName,
+          value: [r.currentConfirmedCount, r.confirmedCount, r.suspectedCount, r.curedCount, r.deadCount]
         }
-      ]
-    };
+      })
 
-    // 使用刚指定的配置项和数据显示图表。
-    myChart.setOption(option);
+      // 指定图表的配置项和数据
+      var option = {
+        visualMap: {
+          pieces: [
+            { gt: 1000, lte: 9999, label: '1000-9999', color: 'purple' },
+            { gt: 99, lte: 999, label: '100-999', color: 'red' },
+            { gt: 10, lte: 99, label: '10-99', color: 'orangered' },
+            { gt: 0, lte: 10, label: '1-10', color: 'orange' },
+            { value: 0, color: "#fff", label: "0" }
+          ]
+        },
+        title: {
+          text: "demo",
+          link: "http://www.baidu.com",
+          textStyle: {
+            color: 'green',
+          },
+          subtext: "123",
+          left: 'center',
+          padding: 15
+        },
+        // 悬浮提示
+        tooltip: {
+          // formatter:'{a}--{b}--{c}'
+          formatter(res) {
+            let {data,marker}=res
+            console.log(marker)
+            return `
+              ${data.name}<br>
+              ${marker}当前确诊:${data.value[0]}<br>
+              当前疑似:${data.value[1]}<br>
+              总确诊:${data.value[2]}<br>
+              治愈:${data.value[3]}<br>
+              死亡:${data.value[4]}<br>
+            `
+          }
+        },
+        series: [
+          {
+            name: '疫情地图',
+            type: 'map',
+            map: 'china',
+            data
+            // itemStyle:{
+            //   areaColor:'green',
+            //   color:'red'
+            // }
+            // data: [{
+            //   name: '湖北',
+            //   value: 10000,
+            //   itemStyle: {
+            //     areaColor: 'green'
+            //   }
+            // }, {
+            //   name: '江苏',
+            //   value: 1999,
+            //   itemStyle: {
+            //     areaColor: 'red'
+            //   }
+            // }]
+
+          }
+        ]
+      };
+
+      // 使用刚指定的配置项和数据显示图表。
+      myChart.setOption(option);
+    })
   </script>
 </body>
 
