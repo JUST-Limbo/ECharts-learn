@@ -43,3 +43,57 @@ header .showTime {
 .mainbox .column:nth-child(3) {
   flex: 3;
 }
+.mainbox .column .panel {
+  position: relative;
+  height: 3.875rem;
+  padding: 0 0.1875rem 0.5rem;
+  margin-bottom: 0.1875rem;
+  border: 1px solid rgba(25, 186, 139, 0.17);
+  background: url(../images/line.png) rgba(255, 255, 255, 0.03);
+}
+.mainbox .column .panel::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 10px;
+  width: 10px;
+  border-left: 2px solid #02a6b5;
+  border-top: 2px solid #02a6b5;
+}
+.mainbox .column .panel::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 10px;
+  width: 10px;
+  border-right: 2px solid #02a6b5;
+  border-top: 2px solid #02a6b5;
+}
+.mainbox .column .panel .panel-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+.mainbox .column .panel .panel-footer::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 10px;
+  width: 10px;
+  border-left: 2px solid #02a6b5;
+  border-bottom: 2px solid #02a6b5;
+}
+.mainbox .column .panel .panel-footer::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  height: 10px;
+  width: 10px;
+  border-right: 2px solid #02a6b5;
+  border-bottom: 2px solid #02a6b5;
+}
