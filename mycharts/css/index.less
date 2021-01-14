@@ -3,6 +3,13 @@
   padding: 0;
   box-sizing: border-box;
 }
+li {
+  list-style: none;
+}
+@font-face {
+  font-family: electronicFont;
+  src: url(../font/DS-DIGIT.TTF);
+}
 body {
   background: url(../images/bg.jpg) no-repeat top center;
   line-height: 1.15;
@@ -32,11 +39,12 @@ header {
   min-width: 1024px;
   max-width: 1920px;
   margin: 0 auto;
-  padding: 0.125rem 0.125rem 0;
+  padding: 0.125rem 0.125rem;
   .column {
     flex: 3;
     &:nth-child(2) {
       flex: 5;
+      margin: 0.125rem 0.1875rem;
     }
     &:nth-child(3) {
       flex: 3;
@@ -94,17 +102,80 @@ header {
           border-bottom: 2px solid #02a6b5;
         }
       }
-      h2{
-        height: .6rem;
+      h2 {
+        height: 0.6rem;
         color: #fff;
-        line-height: .6rem;
+        line-height: 0.6rem;
         text-align: center;
-        font-size: .25rem;
+        font-size: 0.25rem;
         font-weight: 400;
       }
-      .chart{
+      .chart {
         height: 3rem;
         background-color: pink;
+      }
+    }
+  }
+}
+.no {
+  background-color: rgba(101, 132, 226, 0.1);
+  padding: 0.1875rem;
+  .no-hd {
+    position: relative;
+    border: 1px solid rgba(25, 186, 139, 0.17);
+    &::before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      content: "";
+      width: 30px;
+      height: 10px;
+      border-top: 2px solid #02a6b5;
+      border-left: 2px solid #02a6b5;
+    }
+    &::after {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      content: "";
+      width: 30px;
+      height: 10px;
+      border-bottom: 2px solid #02a6b5;
+      border-right: 2px solid #02a6b5;
+    }
+    ul {
+      display: flex;
+      li {
+        position: relative;
+        flex: 1;
+        line-height: 1rem;
+        font-size: 0.875rem;
+        color: #ffeb7b;
+        text-align: center;
+        font-family: "electronicFont";
+        &:nth-child(1):after {
+          content: "";
+          position: absolute;
+          top: 25%;
+          right: 0;
+          height: 50%;
+          width: 1px;
+          background: rgba(255, 255, 255, 0.2);
+        }
+      }
+    }
+  }
+  .no-bd {
+    ul {
+      display: flex;
+      li {
+        flex: 1;
+        text-align: center;
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.225rem;
+        height: 0.5rem;
+        line-height: 0.5rem;
+        padding-top: 0.125rem;
       }
     }
   }
